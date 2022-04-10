@@ -1,17 +1,24 @@
 const { Schema, model } = require("mongoose");
 
-const thoughtSchema = new Schema({
-  thoughtText: {
-    type: String,
-    required: true,
-    minlength: 1,
-    maxlength: 280,
+const thoughtSchema = new Schema(
+  {
+    thoughtText: {
+      type: String,
+      required: true,
+      minlength: 1,
+      maxlength: 280,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+    },
   },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
-});
+  {
+    toJSON: {
+      getters: true,
+    },
+  }
+);
 
 const Thought = model("Thought", thoughtSchema);
 
