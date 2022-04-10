@@ -6,6 +6,8 @@ const {
   findUserByID,
   updateUserByID,
   deleteUserByID,
+  addFriendByID,
+  removeFriendByID,
 } = require("../../controllers/userController");
 
 //-------------------------------------------------- CREATE //
@@ -19,16 +21,22 @@ router.route("/").post(createUser);
 router.route("/").get(findAllUsers);
 
 // GET: Find User by ID
-router.route("/:studentID").get(findUserByID);
+router.route("/:userID").get(findUserByID);
 
 //-------------------------------------------------- UPDATE //
 
 // PUT: Update User by ID
-router.route("/:studentID").put(updateUserByID);
+router.route("/:userID").put(updateUserByID);
+
+// POST: Add a New Friend
+router.route("/:userID/friends/:friendID").post(addFriendByID);
 
 //-------------------------------------------------- DELETE //
 
 // DELETE: Delete User by ID
-router.route("/:studentID").delete(deleteUserByID);
+router.route("/:userID").delete(deleteUserByID);
+
+// DELETE: Delete Friend by ID
+router.route("/:userID/friends/:friendID").delete(removeFriendByID);
 
 module.exports = router;

@@ -43,7 +43,7 @@ module.exports = {
     try {
       const userByID = await User.findOneAndUpdate(
         {
-          _id: req.params.studentID,
+          _id: req.params.userID,
         },
         {
           $set: req.body,
@@ -59,15 +59,58 @@ module.exports = {
     }
   },
 
+  // POST: Add a New Friend
+  async addFriendByID(req, res) {
+    try {
+      const newFriend = await User.findOneAndUpdate(
+        {
+          _id: req.params.userID,
+        },
+        {
+          $addToSet: {
+            friends: req.params.friendID,
+          },
+        },
+        {
+          runValidators: true,
+          new: true,
+        }
+      );
+      res.status(200).json(newFriend);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
   //-------------------------------------------------- DELETE //
 
   // DELETE: Delete User by ID
   async deleteUserByID(req, res) {
     try {
       const userByID = await User.findOneAndDelete({
-        _id: req.params.studentID,
+        _id: req.params.userID,
       });
       res.status(200).json(userByID);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
+  // DELETE: Remove a Friend
+  async removeFriendByID(req, res) {
+    try {
+      const removeFriend = await User.findOneAndUpdate(
+        {
+          _id: req.params.userID,
+        },
+        {
+          $pull: {
+            friends: req.params.friendID,
+          },
+        },
+        { new: true }
+      );
+      res.status(200).json(removeFriend);
     } catch (error) {
       res.status(500).json(error);
     }
