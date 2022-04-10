@@ -3,6 +3,8 @@ const router = require("express").Router();
 const {
   createUser,
   findAllUsers,
+  findUserByID,
+  updateUserByID,
 } = require("../../controllers/userController");
 
 //-------------------------------------------------- CREATE //
@@ -15,7 +17,13 @@ router.route("/").post(createUser);
 // GET: Find All Users
 router.route("/").get(findAllUsers);
 
+// GET: Find User by ID
+router.route("/:studentID").get(findUserByID);
+
 //-------------------------------------------------- UPDATE //
+
+// PUT: Update User by ID
+router.route("/:studentID").put(updateUserByID);
 
 //-------------------------------------------------- DELETE //
 
