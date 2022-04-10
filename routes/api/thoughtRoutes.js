@@ -1,7 +1,16 @@
 const router = require("express").Router();
 
-const { getThoughts } = require("../../controllers/thoughtController");
+const { findAllThoughts } = require("../../controllers/thoughtController");
 
-router.route("/").get(getThoughts);
+//-------------------------------------------------- CREATE //
+
+//-------------------------------------------------- READ //
+
+// GET: Find All Thoughts
+router.route("/").get(findAllThoughts);
+
+//-------------------------------------------------- UPDATE //
+
+//-------------------------------------------------- DELETE //
 
 module.exports = router;
