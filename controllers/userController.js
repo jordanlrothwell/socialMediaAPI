@@ -1,3 +1,4 @@
+const Thought = require("../models/Thought");
 const User = require("../models/User");
 
 module.exports = {
@@ -89,6 +90,10 @@ module.exports = {
     try {
       const userByID = await User.findOneAndDelete({
         _id: req.params.userID,
+      });
+      // delete associated thoughts
+      await Thought.deleteMany({
+        username: userByID.username,
       });
       res.status(200).json(userByID);
     } catch (error) {
