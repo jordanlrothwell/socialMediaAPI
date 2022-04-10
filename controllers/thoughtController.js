@@ -76,6 +76,29 @@ module.exports = {
     }
   },
 
+  // POST: Add New Reaction
+  async addReaction(req, res) {
+    try {
+      const thoughtByID = await Thought.findOneAndUpdate(
+        {
+          _id: req.params.thoughtID,
+        },
+        {
+          $addToSet: {
+            reactions: req.body,
+          },
+        },
+        {
+          runValidators: true,
+          new: true,
+        }
+      );
+      res.status(200).json(thoughtByID);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
   //-------------------------------------------------- DELETE //
 
   // DELETE: Delete Thought by ID
@@ -97,7 +120,6 @@ module.exports = {
           new: true,
         }
       );
-      console.log(`Removed thought from user: ${updateUser}`)
       const deleteThought = await Thought.findOneAndDelete(
         {
           _id: req.params.thoughtID,
@@ -105,6 +127,33 @@ module.exports = {
         { new: true }
       );
       res.status(200).json(deleteThought);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
+  // DELETE: Remove a Reaction
+  async removeReaction(req, res) {
+    try {
+      const thoughtByID = await Thought.findOneAndUpdate(
+        {
+          _id: req.params.thoughtID,
+        },
+        {
+          $pull: {
+            reactions: {
+              _id: req.params.reactionID,
+            },
+          },
+        },
+        {
+          new: true,
+        }
+      );
+      if (!thoughtByID) {
+        res.status(400).json({message: `No thought with that ID`})
+      }
+      res.status(200).json(thoughtByID);
     } catch (error) {
       res.status(500).json(error);
     }
