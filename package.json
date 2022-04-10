@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/jordanlrothwell/socialMediaAPI#readme",
   "dependencies": {
-    "mongoose": "^6.2.10"
+    "express": "^4.17.3",
+    "mongoose": "^6.2.10",
+    "path": "^0.12.7"
   }
 }

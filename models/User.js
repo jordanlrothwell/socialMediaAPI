@@ -1,4 +1,4 @@
-const { Schema, Types } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const validateEmail = require("../utils/validateEmail");
 
 const userSchema = new Schema({
@@ -15,3 +15,7 @@ const userSchema = new Schema({
     validate: [validateEmail, `Please fill a valid email address`],
   },
 });
+
+const User = model("User", userSchema);
+
+module.exports = User;

@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const thoughtSchema = new Schema({
   thoughtText: {
@@ -10,6 +10,9 @@ const thoughtSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now(),
-    
   },
 });
+
+const Thought = model("Thought", thoughtSchema);
+
+module.exports = Thought;
