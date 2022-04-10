@@ -29,7 +29,7 @@ module.exports = {
   async findUserByID(req, res) {
     try {
       const userByID = await User.findOne({
-        _id: req.params.studentID,
+        _id: req.params.userID,
       }).select("-__v");
       res.status(200).json(userByID);
     } catch (error) {
