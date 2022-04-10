@@ -107,7 +107,7 @@ module.exports = {
       const thoughtByID = await Thought.findOne({
         _id: req.params.thoughtID,
       });
-      const updateUser = await User.findOneAndUpdate(
+      await User.findOneAndUpdate(
         {
           username: thoughtByID["username"],
         },
@@ -142,7 +142,7 @@ module.exports = {
         {
           $pull: {
             reactions: {
-              _id: req.params.reactionID,
+              reactionId: req.params.reactionID,
             },
           },
         },
