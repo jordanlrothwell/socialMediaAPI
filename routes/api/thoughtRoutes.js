@@ -4,6 +4,8 @@ const {
   findAllThoughts,
   findThoughtByID,
   createThought,
+  updateThoughtByID,
+  deleteThoughtByID,
 } = require("../../controllers/thoughtController");
 
 //-------------------------------------------------- CREATE //
@@ -21,6 +23,12 @@ router.route("/:thoughtID").get(findThoughtByID);
 
 //-------------------------------------------------- UPDATE //
 
+// PUT: Update Thought by ID
+router.route("/:thoughtID").put(updateThoughtByID);
+
 //-------------------------------------------------- DELETE //
+
+// DELETE: Delete Thought by ID
+router.route("/:thoughtID").delete(deleteThoughtByID);
 
 module.exports = router;
