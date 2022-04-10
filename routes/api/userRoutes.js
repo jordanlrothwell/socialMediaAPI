@@ -5,6 +5,7 @@ const {
   findAllUsers,
   findUserByID,
   updateUserByID,
+  deleteUserByID,
 } = require("../../controllers/userController");
 
 //-------------------------------------------------- CREATE //
@@ -26,5 +27,8 @@ router.route("/:studentID").get(findUserByID);
 router.route("/:studentID").put(updateUserByID);
 
 //-------------------------------------------------- DELETE //
+
+// DELETE: Delete User by ID
+router.route("/:studentID").delete(deleteUserByID);
 
 module.exports = router;

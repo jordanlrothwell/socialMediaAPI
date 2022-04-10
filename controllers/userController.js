@@ -60,4 +60,16 @@ module.exports = {
   },
 
   //-------------------------------------------------- DELETE //
+
+  // DELETE: Delete User by ID
+  async deleteUserByID(req, res) {
+    try {
+      const userByID = await User.findOneAndDelete({
+        _id: req.params.studentID,
+      });
+      res.status(200).json(userByID);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };
